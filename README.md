@@ -1,109 +1,61 @@
-# vue-components-develop
-
-组件的元素类名命名需要独特，避免使用时会造成类名冲突
-组件为了方便修改样式，一般不加 scoped，如果加了 scoped，使用时可以使用深度选择器修改样式
-
-封装组件需要
-1、组件通讯
-2、插槽 slot
-3、props 校验
-
-Button 组件
-1、组件通讯
-2、插槽 slot
-3、props 校验
-
-Dialog 组件
-1、vue 过渡动画
-2、sync 修饰符
-3、具名插槽与 v-slot 指令
-
-封装表单组件必须需要 type、name、value/v-model 属性
-Input 组件
-1、placeholder 输入提示
-2、type 文本框类型
-3、disabled 禁用
-4、clearable 是否可以清空/显示清空图标
-5、show-password 密码显示与隐藏/显示眼睛图标
-6、name 原生 name 属性
-7、value/v-model 文本框的值
-
-Switch 组件
-1、value/v-model 开关的值
-2、name 原生 name 属性
-3、active-color 激活的颜色
-4、inactive-color 非激活的颜色
-
-Radio 组件
-1、v-model
-2、label 单选框 input type="radio"的 value 值
-3、name
-4、为了不用让每个 radio 都绑定 v-model 可以再封装 radio-group 组件，用 radio-group 包裹 radio 用 radio-group 绑定 v-model
-
-checkbox 组件
-1、v-model
-2、label 复选框 input type="checkbox"的 value 值
-3、name
-4、checkbox 复选框的 v-model 的绑定分两种情况
-4.1 如果没有被 checkbox-group 组件包裹，则 v-model 是绑定的是布尔值，控制是否勾选
-4.2 如果被 checkbox-group 组件包裹，则 v-model 绑定的是从 checkbox-group 组件传过来一个数组
-
-
 
 效果演示
 
 - 初始化vue项目
 
-  vue create demo
+    vue create demo
 
 - 安装组件库
 
-  yarn add heima-ui
+    yarn add heima-ui
 
 - 全局导入
 
-  import HeimaUI from 'heima-ui'
-  import 'heima-ui/lib/heimui.css'
-
-  Vue.use(HeimaUI)
+    import HeimaUI from 'heima-ui'
+    import 'heima-ui/lib/heimui.css'
+    
+    Vue.use(HeimaUI)
 
 - 使用组件
 
-  <template>
-    <div id="app">
-      <hm-button type="success" @click="visible=true">显示登录框</hm-button>
-      <hm-dialog title="用户登录" :visible.sync="visible" width="30%">
-        <hm-form :model="model" label-width="80px">
-          <hm-form-item label="用户名">
-            <hm-input v-model="model.username" placeholder="请输入用户名" clearable></hm-input>
-          </hm-form-item>
-          <hm-form-item label="用户密码">
-            <hm-input v-model="model.password" placeholder="请输入用户密码" show-password></hm-input>
-          </hm-form-item>
-          <hm-form-item label="即时配送">
-            <hm-switch v-model="model.soon" active-color="green" inactive-color="red"></hm-switch>
-          </hm-form-item>
-          <hm-form-item label="爱好">
-            <hm-checkbox-group v-model="model.hobby">
-              <hm-checkbox label="篮球"></hm-checkbox>
-              <hm-checkbox label="足球"></hm-checkbox>
-              <hm-checkbox label="乒乓球"></hm-checkbox>
-            </hm-checkbox-group>
-          </hm-form-item>
-          <hm-form-item label="性别">
-            <hm-radio-group v-model="model.gender">
-              <hm-radio label="1">男</hm-radio>
-              <hm-radio label="0">女</hm-radio>
-            </hm-radio-group>
-          </hm-form-item>
-        </hm-form>
-        <template v-slot:footer>
-          <hm-button type="primary" @click="login">登录</hm-button>
-          <hm-button @click="visible=false">取消</hm-button>
-        </template>
-      </hm-dialog>
-    </div>
-  </template>
+    <template>
+      <div id="app">
+        <hm-button type="success" @click="visible=true">显示登录框</hm-button>
+        <hm-dialog title="用户登录" :visible.sync="visible" width="30%">
+          <hm-form :model="model" label-width="80px">
+            <hm-form-item label="用户名">
+              <hm-input v-model="model.username" placeholder="请输入用户名" clearable></hm-input>
+            </hm-form-item>
+            <hm-form-item label="用户密码">
+              <hm-input v-model="model.password" placeholder="请输入用户密码" show-password></hm-input>
+            </hm-form-item>
+            <hm-form-item label="即时配送">
+              <hm-switch v-model="model.soon" active-color="green" inactive-color="red"></hm-switch>
+            </hm-form-item>
+            <hm-form-item label="爱好">
+              <hm-checkbox-group v-model="model.hobby">
+                <hm-checkbox label="篮球"></hm-checkbox>
+                <hm-checkbox label="足球"></hm-checkbox>
+                <hm-checkbox label="乒乓球"></hm-checkbox>
+              </hm-checkbox-group>
+            </hm-form-item>
+            <hm-form-item label="性别">
+              <hm-radio-group v-model="model.gender">
+                <hm-radio label="1">男</hm-radio>
+                <hm-radio label="0">女</hm-radio>
+              </hm-radio-group>
+            </hm-form-item>
+          </hm-form>
+          <template v-slot:footer>
+            <hm-button type="primary" @click="login">登录</hm-button>
+            <hm-button @click="visible=false">取消</hm-button>
+          </template>
+        </hm-dialog>
+      </div>
+    </template>
+    
+
+
 
 常见组件封装
 
@@ -331,7 +283,6 @@ plain属性
         color: #fff;
       }
     }
-    
 
 
 round属性
@@ -340,7 +291,6 @@ round属性
       border-radius: 20px;
       padding: 12px 23px;
     }
-    
 
 
 circle属性
@@ -350,7 +300,6 @@ circle属性
       border-radius: 50%;
       padding: 12px;
     }
-    
 
 
 icon的支持
@@ -358,14 +307,12 @@ icon的支持
 在main.js中引入字体图标文件
 
     import './assets/fonts/font.scss'
-    
 
 
 结构
 
     <i :class="icon" v-if="icon"></i>
     <slot></slot>
-    
 
 
 js
@@ -374,7 +321,6 @@ js
       type: String,
       default: ''
     }
-    
 
 
 样式
@@ -383,15 +329,14 @@ js
     .hm-button [class*=hm-icon-]+span {
         margin-left: 5px;
     }
-    
 
 
 禁用按钮
 
 - props
 
-  disabled: Boolean
-
+    disabled: Boolean
+    
 - 结构
 
       <button class="hm-button" :class="[`hm-button--${type}`, {
@@ -403,69 +348,69 @@ js
         :disabled="disabled"
         @click="handleClick"
       >
-      
-
+  
 - 样式
 
-  // 禁用
-  .hm-button.is-disabled,
-  .hm-button.is-disabled:focus,
-  .hm-button.is-disabled:hover {
-      color: #c0c4cc;
-      cursor: not-allowed;
-      background-image: none;
-      background-color: #fff;
-      border-color: #ebeef5;
-  }
-  .hm-button.is-disabled,
-  .hm-button.is-disabled:focus,
-  .hm-button.is-disabled:hover {
-      color: #c0c4cc;
-      cursor: not-allowed;
-      background-image: none;
-      background-color: #fff;
-      border-color: #ebeef5;
-  }
-  .hm-button--primary.is-disabled,
-  .hm-button--primary.is-disabled:active,
-  .hm-button--primary.is-disabled:focus,
-  .hm-button--primary.is-disabled:hover {
-      color: #fff;
-      background-color: #a0cfff;
-      border-color: #a0cfff;
-  }
-  .hm-button--success.is-disabled,
-  .hm-button--success.is-disabled:active,
-  .hm-button--success.is-disabled:focus,
-  .hm-button--success.is-disabled:hover {
-      color: #fff;
-      background-color: #b3e19d;
-      border-color: #b3e19d;
-  }
-  .hm-button--info.is-disabled,
-  .hm-button--info.is-disabled:active,
-  .hm-button--info.is-disabled:focus,
-  .hm-button--info.is-disabled:hover {
-      color: #fff;
-      background-color: #c8c9cc;
-      border-color: #c8c9cc;
-  }
-  .hm-button--warning.is-disabled,
-  .hm-button--warning.is-disabled:active,
-  .hm-button--warning.is-disabled:focus,
-  .hm-button--warning.is-disabled:hover {
-      color: #fff;
-      background-color: #f3d19e;
-      border-color: #f3d19e;
-  }
-  .hm-button--danger.is-disabled,
-  .hm-button--danger.is-disabled:active,
-  .hm-button--danger.is-disabled:focus,
-  .hm-button--danger.is-disabled:hover {
-      color: #fff;
-      background-color: #fab6b6;
-      border-color: #fab6b6;
-  }
+    // 禁用
+    .hm-button.is-disabled,
+    .hm-button.is-disabled:focus,
+    .hm-button.is-disabled:hover {
+        color: #c0c4cc;
+        cursor: not-allowed;
+        background-image: none;
+        background-color: #fff;
+        border-color: #ebeef5;
+    }
+    .hm-button.is-disabled,
+    .hm-button.is-disabled:focus,
+    .hm-button.is-disabled:hover {
+        color: #c0c4cc;
+        cursor: not-allowed;
+        background-image: none;
+        background-color: #fff;
+        border-color: #ebeef5;
+    }
+    .hm-button--primary.is-disabled,
+    .hm-button--primary.is-disabled:active,
+    .hm-button--primary.is-disabled:focus,
+    .hm-button--primary.is-disabled:hover {
+        color: #fff;
+        background-color: #a0cfff;
+        border-color: #a0cfff;
+    }
+    .hm-button--success.is-disabled,
+    .hm-button--success.is-disabled:active,
+    .hm-button--success.is-disabled:focus,
+    .hm-button--success.is-disabled:hover {
+        color: #fff;
+        background-color: #b3e19d;
+        border-color: #b3e19d;
+    }
+    .hm-button--info.is-disabled,
+    .hm-button--info.is-disabled:active,
+    .hm-button--info.is-disabled:focus,
+    .hm-button--info.is-disabled:hover {
+        color: #fff;
+        background-color: #c8c9cc;
+        border-color: #c8c9cc;
+    }
+    .hm-button--warning.is-disabled,
+    .hm-button--warning.is-disabled:active,
+    .hm-button--warning.is-disabled:focus,
+    .hm-button--warning.is-disabled:hover {
+        color: #fff;
+        background-color: #f3d19e;
+        border-color: #f3d19e;
+    }
+    .hm-button--danger.is-disabled,
+    .hm-button--danger.is-disabled:active,
+    .hm-button--danger.is-disabled:focus,
+    .hm-button--danger.is-disabled:hover {
+        color: #fff;
+        background-color: #fab6b6;
+        border-color: #fab6b6;
+    }
+    
 
 
 
@@ -474,7 +419,6 @@ click事件支持
 结构
 
     @click="handleClick"
-    
 
 
 js
@@ -484,7 +428,6 @@ js
         this.$emit('click', e)
       }
     }
-    
 
 
 dialog组件
@@ -494,7 +437,6 @@ dialog组件
     vue过渡与动画
     sync修饰符
     具名插槽与v-slot指令
-    
 
 
 参数支持
@@ -541,7 +483,6 @@ dialog组件
         </div>
       </div>
     </template>
-    
 
 
 样式
@@ -605,7 +546,6 @@ dialog组件
         }
       }
     }
-    
 
 
 title属性
@@ -617,7 +557,6 @@ title属性既支持传入title属性，也只是传入title插槽
     <slot name="title">
       <span class="hm-dialog__title">{{title}}</span>
     </slot>
-    
 
 
 js
@@ -628,7 +567,6 @@ js
         default: '提示'
       }
     }
-    
 
 
 width属性与top属性
@@ -636,7 +574,6 @@ width属性与top属性
 结构
 
     <div class="hm-dialog" :style="style">
-    
 
 
 js
@@ -663,7 +600,6 @@ js
           }
         }
       }
-    
 
 
 内容插槽
@@ -672,7 +608,6 @@ js
       <!-- 默认插槽 -->
       <slot></slot>
     </div>
-    
 
 
 底部插槽
@@ -680,7 +615,6 @@ js
     <div class="hm-dialog__footer" v-if="$slots.footer">
       <slot name="footer"></slot>
     </div>
-    
 
 
 控制显示与隐藏
@@ -688,19 +622,16 @@ js
 结构
 
     <div class="hm-dialog__wrapper" v-show="visible">
-    
 
 
 点击遮罩层关闭
 
     <div class="hm-dialog__wrapper" v-show="visible" @click.self="handleClose">
-    
 
 
 点击关闭按钮关闭
 
      <button class="hm-dialog__headerbtn" @click="handleClose">
-    
 
 
 关闭处理
@@ -708,7 +639,6 @@ js
     handleClose () {
     	this.$emit('update:visible', false)
     }
-    
 
 
 
@@ -718,7 +648,6 @@ js
 结构
 
     <transition name="dialog-fade" @after-enter="afterEnter" @after-leave="afterLeave"></transition>
-    
 
 
 样式
@@ -752,7 +681,6 @@ js
         opacity: 0;
       }
     }
-    
 
 
 js
@@ -763,7 +691,6 @@ js
     afterLeave () {
       this.$emit('closed')
     }
-    
 
 
 input组件
@@ -796,7 +723,6 @@ input组件
         <input type="text" class="hm-input__inner">
       </div>
     </template>
-    
 
 
 样式
@@ -829,39 +755,37 @@ input组件
         }
       }
     }
-    
 
 
 props处理placeholde, type,name
 
 - placeholer
 
-  <input type="text" class="hm-input__inner" :placeholder="placeholder">
+    <input type="text" class="hm-input__inner" :placeholder="placeholder">
+    
 
-
-    props: {
-      placeholder: {
-        type: String,
-        default: ''
+      props: {
+        placeholder: {
+          type: String,
+          default: ''
+        }
       }
-    }
-
+    
 - type属性-密码框
 
-      <input
-        class="hm-input__inner"
-        :placeholder="placeholder"
-        :type="type"
-        :disabled="disabled"
-      >
-      
+        <input
+          class="hm-input__inner"
+          :placeholder="placeholder"
+          :type="type"
+          :disabled="disabled"
+        >
+    
 
-
-      type: {
-        type: String,
-        default: 'text'
-      },
-      
+        type: {
+          type: String,
+          default: 'text'
+        },
+    
 
 
 
@@ -878,7 +802,6 @@ props处理placeholde, type,name
              :disabled="disabled"
              >
     </div>
-    
 
 
 js
@@ -887,7 +810,6 @@ js
           type: Boolean,
           default: false
         }
-    
 
 
 样式
@@ -898,35 +820,35 @@ js
           color: #c0c4cc;
           cursor: not-allowed;
         }
-    
 
 
 v-model语法糖
 
 - v-model语法糖
 
-  给普通表单元素元素使用v-model
-  <input type="text" v-model="mes">
-  <input v-bind:value="mes"  v-on:input="mes= $event.target.value"/>
-
-  给组件使用v-model指令,实质上相当于给组件传递了value属性以及监听了input事件
-  <hm-input v-model="msg">
-  等价与
-  <hm-input v-bind:value="mes"  v-on:input="mes= arguments[0]"/>
-
+    给普通表单元素元素使用v-model
+    <input type="text" v-model="mes">
+    <input v-bind:value="mes"  v-on:input="mes= $event.target.value"/>
+    
+    给组件使用v-model指令,实质上相当于给组件传递了value属性以及监听了input事件
+    <hm-input v-model="msg">
+    等价与
+    <hm-input v-bind:value="mes"  v-on:input="mes= arguments[0]"/>
+    
 - html结构
 
-  <div class="hm-input">
-    <input
-           class="hm-input__inner"
-           :class="{'is-disabled': disabled}"
-           :placeholder="placeholder"
-           :type="type"
-           :disabled="disabled"
-           :value="value"
-           @input="handleInput"
-           >
-  </div>
+    <div class="hm-input">
+      <input
+             class="hm-input__inner"
+             :class="{'is-disabled': disabled}"
+             :placeholder="placeholder"
+             :type="type"
+             :disabled="disabled"
+             :value="value"
+             @input="handleInput"
+             >
+    </div>
+    
 
 js
 
@@ -939,7 +861,6 @@ js
           this.$emit('input', e.target.value)
         }
       }
-    
 
 
 clearable与show-password处理
@@ -948,28 +869,29 @@ clearable与show-password处理
 
 - 基本结构
 
-  <span class="hm-input__suffix">
-    <i class="hm-input__icon hm-icon-circle-close"></i>
-    <i class="hm-input__icon hm-icon-view"></i>
-  </span>
-
+    <span class="hm-input__suffix">
+      <i class="hm-input__icon hm-icon-circle-close"></i>
+      <i class="hm-input__icon hm-icon-view"></i>
+    </span>
+    
 - props接收
 
-  clearable: {
-    type: Boolean,
-    default: false
-  },
-  showPassword: {
-    type: Boolean,
-    default: false
-  }
-
+    clearable: {
+      type: Boolean,
+      default: false
+    },
+    showPassword: {
+      type: Boolean,
+      default: false
+    }
+    
 - 控制按钮显示和隐藏
 
-  <span class="hm-input__suffix">
-    <i class="hm-input__icon hm-icon-circle-close" v-if="clearable"></i>
-    <i class="hm-input__icon hm-icon-view" v-if="showPassword"></i>
-  </span>
+    <span class="hm-input__suffix">
+      <i class="hm-input__icon hm-icon-circle-close" v-if="clearable"></i>
+      <i class="hm-input__icon hm-icon-view" v-if="showPassword"></i>
+    </span>
+    
 
 样式
 
@@ -995,58 +917,55 @@ clearable与show-password处理
         }
       }
     }
-    
 
 
 - 控制hm-input--suffix的类名
 
-  <div class="hm-input" :class="{'hm-input--suffix': this.clearable || this.showPassword}">
-
-
-  <span class="hm-input__suffix" v-if="this.clearable || this.showPassword">
-
+    <div class="hm-input" :class="{'hm-input--suffix': this.clearable || this.showPassword}">
+    
+    <span class="hm-input__suffix" v-if="this.clearable || this.showPassword">
+    
 - 使用计算属性优化
 
-  computed: {
-    showSuffix () {
-      return this.clearable || this.showPassword
+    computed: {
+      showSuffix () {
+        return this.clearable || this.showPassword
+      }
     }
-  }
-
+    
 - 注册事件-清空内容和切换密码显示
 
-      clear () {
-        // console.log('123')
-        this.$emit('input', '')
-      }
-      
-
+        clear () {
+          // console.log('123')
+          this.$emit('input', '')
+        }
+    
 - 控制密码显示
 
-  data () {
-    return {
-      // 是否显示密码
-      passwordVisible: false
+    data () {
+      return {
+        // 是否显示密码
+        passwordVisible: false
+      }
+    },
+    
+    <input
+      class="hm-input__inner"
+      :class="{'is-disabled': disabled}"
+      :placeholder="placeholder"
+      :type="showPassword ? (passwordVisible ? 'text': 'password') : type"
+      :name="name"
+      :disabled="disabled"
+      :value="value"
+      @input="handleInput"
+      ref="input"
+    >
+    
+    handlePasswordVisible () {
+      // 切换type类型
+      this.passwordVisible = !this.passwordVisible
     }
-  },
-
-  <input
-    class="hm-input__inner"
-    :class="{'is-disabled': disabled}"
-    :placeholder="placeholder"
-    :type="showPassword ? (passwordVisible ? 'text': 'password') : type"
-    :name="name"
-    :disabled="disabled"
-    :value="value"
-    @input="handleInput"
-    ref="input"
-
-  >
-
-  handlePasswordVisible () {
-    // 切换type类型
-    this.passwordVisible = !this.passwordVisible
-  }
+    
 
 其他常见事件的支持
 
@@ -1059,7 +978,6 @@ clearable与show-password处理
         handleChange (e) {
           this.$emit('change', e.target.value)
         }
-    
 
 
 switch组件
@@ -1083,93 +1001,94 @@ switch组件
 
 - 页面
 
-  <template>
-    <label class="hm-switch">
-      <span class="hm-switch__core">
-        <span class="hm-switch__button"></span>
-      </span>
-    </label>
-  </template>
-
+    <template>
+      <label class="hm-switch">
+        <span class="hm-switch__core">
+          <span class="hm-switch__button"></span>
+        </span>
+      </label>
+    </template>
+    
 - 样式
 
-  .hm-switch {
-    display: inline-flex;
-    align-items: center;
-    position: relative;
-    font-size: 14px;
-    line-height: 20px;
-    height: 20px;
-    vertical-align: middle;
-    .hm-switch__core {
-      margin: 0;
-      display: inline-block;
+    .hm-switch {
+      display: inline-flex;
+      align-items: center;
       position: relative;
-      width: 40px;
+      font-size: 14px;
+      line-height: 20px;
       height: 20px;
-      border: 1px solid #dcdfe6;
-      outline: none;
-      border-radius: 10px;
-      box-sizing: border-box;
-      background: #dcdfe6;
-      cursor: pointer;
-      transition: border-color .3s,background-color .3s;
       vertical-align: middle;
-      .hm-switch__button {
-        position: absolute;
-        top: 1px;
-        left: 1px;
-        border-radius: 100%;
-        transition: all .3s;
-        width: 16px;
-        height: 16px;
-        background-color: #fff;
+      .hm-switch__core {
+        margin: 0;
+        display: inline-block;
+        position: relative;
+        width: 40px;
+        height: 20px;
+        border: 1px solid #dcdfe6;
+        outline: none;
+        border-radius: 10px;
+        box-sizing: border-box;
+        background: #dcdfe6;
+        cursor: pointer;
+        transition: border-color .3s,background-color .3s;
+        vertical-align: middle;
+        .hm-switch__button {
+          position: absolute;
+          top: 1px;
+          left: 1px;
+          border-radius: 100%;
+          transition: all .3s;
+          width: 16px;
+          height: 16px;
+          background-color: #fff;
+        }
       }
     }
-  }
+    
 
 v-mode双向绑定
 
 - 接收value值
 
-  props: {
-    value: {
-      type: Boolean,
-      default: false
-    }
-  },
-
+    props: {
+      value: {
+        type: Boolean,
+        default: false
+      }
+    },
+    
 - 注册点击事件
 
-  <div class="hm-switch" @click="handleClick">
+    <div class="hm-switch" @click="handleClick">
 
-  
+    
 
 - 事件处理程序
 
-  methods: {
-    handleClick () {
-      this.$emit('input', !this.value)
-    }
-  }
-
-- 选中样式
-
-  .hm-switch.is-checked {
-    .hm-switch__core {
-      border-color: #409eff;
-      background-color: #409eff;
-      .hm-switch__button {
-        transform: translateX(20px);
+    methods: {
+      handleClick () {
+        this.$emit('input', !this.value)
       }
     }
-  }
+    
+- 选中样式
 
+    .hm-switch.is-checked {
+      .hm-switch__core {
+        border-color: #409eff;
+        background-color: #409eff;
+        .hm-switch__button {
+          transform: translateX(20px);
+        }
+      }
+    }
+    
 - 控制选中样式
 
-  <div class="hm-switch" @click="handleClick" :class="{'is-checked': value}">
-
-  
+    <div class="hm-switch" @click="handleClick" :class="{'is-checked': value}">
+    
+    
 
 自定义颜色
 
@@ -1180,45 +1099,45 @@ v-mode双向绑定
       active-color="#13ce66"
       inactive-color="#ff4949">
     </hm-switch>
-    
 
 
 - props接收
 
-  activeColor: {
-    type: String,
-    default: ''
-  },
-  inactiveColor: {
-    type: String,
-    default: ''
-  }
-
+    activeColor: {
+      type: String,
+      default: ''
+    },
+    inactiveColor: {
+      type: String,
+      default: ''
+    }
+    
 - 封装设置颜色的方法
 
-  setColor () {
-    if (this.activeColor || this.inactiveColor) {
-      let color = this.value ? this.activeColor : this.inactiveColor
-      this.$refs.core.style.borderColor = color
-      this.$refs.core.style.backgroundColor = color
+    setColor () {
+      if (this.activeColor || this.inactiveColor) {
+        let color = this.value ? this.activeColor : this.inactiveColor
+        this.$refs.core.style.borderColor = color
+        this.$refs.core.style.backgroundColor = color
+      }
     }
-  }
-
+    
 - 页面一进入调用
 
-  mounted () {
-    // 设置颜色
-    this.setColor()
-  },
-
+    mounted () {
+      // 设置颜色
+      this.setColor()
+    },
+    
 - 改变状态后调用
 
-  async handleClick () {
-    this.$emit('input', !this.value)
-    // 改变input框的值
-    await this.$nextTick()
-    this.setColor()
-  },
+    async handleClick () {
+      this.$emit('input', !this.value)
+      // 改变input框的值
+      await this.$nextTick()
+      this.setColor()
+    },
+    
 
 name属性支持
 
@@ -1226,29 +1145,28 @@ name属性支持
 
 - 结构
 
-  <input
-    class="hm-switch__input"
-    type="checkbox"
-
-  >
-
+    <input
+      class="hm-switch__input"
+      type="checkbox"
+    >
+    
 - 样式
 
-  .hm-switch__input {
-    position: absolute;
-    width: 0;
-    height: 0;
-    opacity: 0;
-    margin: 0;
-  }
-
+    .hm-switch__input {
+      position: absolute;
+      width: 0;
+      height: 0;
+      opacity: 0;
+      margin: 0;
+    }
+    
 - name属性的支持
 
-  name: {
-    type: String,
-    default: ''
-  }
-
+    name: {
+      type: String,
+      default: ''
+    }
+    
 - 控制checkbox的值与value同步
 
       mounted () {
@@ -1262,14 +1180,13 @@ name属性支持
           this.$refs.input.checked = this.value
         }
       }
-      
+  
 
 radio组件
 
 前置知识点
 
     radio的基本使用
-    
 
 
 参数支持
@@ -1283,85 +1200,86 @@ radio组件
 
 - html结构
 
-  <template>
-    <label class="hm-radio">
-      <span class="hm-radio__input">
-        <span class="hm-radio__inner"></span>
-        <input
-          class="hm-radio__original"
-          type="radio"
-        >
-      </span>
-      <span class="hm-radio__label">
-        我是label
-      </span>
-    </label>
-  </template>
-
+    <template>
+      <label class="hm-radio">
+        <span class="hm-radio__input">
+          <span class="hm-radio__inner"></span>
+          <input
+            class="hm-radio__original"
+            type="radio"
+          >
+        </span>
+        <span class="hm-radio__label">
+          我是label
+        </span>
+      </label>
+    </template>
+    
 - 样式
 
-  .hm-radio {
-    color: #606266;
-    font-weight: 500;
-    line-height: 1;
-    position: relative;
-    cursor: pointer;
-    display: inline-block;
-    white-space: nowrap;
-    outline: none;
-    font-size: 14px;
-    margin-right: 30px;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    .hm-radio__input {
-      white-space: nowrap;
-      cursor: pointer;
-      outline: none;
-      display: inline-block;
+    .hm-radio {
+      color: #606266;
+      font-weight: 500;
       line-height: 1;
       position: relative;
-      vertical-align: middle;
-      .hm-radio__inner {
-        border: 1px solid #dcdfe6;
-        border-radius: 100%;
-        width: 14px;
-        height: 14px;
-        background-color: #fff;
-        position: relative;
+      cursor: pointer;
+      display: inline-block;
+      white-space: nowrap;
+      outline: none;
+      font-size: 14px;
+      margin-right: 30px;
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      .hm-radio__input {
+        white-space: nowrap;
         cursor: pointer;
+        outline: none;
         display: inline-block;
-        box-sizing: border-box;
-        &:after {
-          width: 4px;
-          height: 4px;
+        line-height: 1;
+        position: relative;
+        vertical-align: middle;
+        .hm-radio__inner {
+          border: 1px solid #dcdfe6;
           border-radius: 100%;
+          width: 14px;
+          height: 14px;
           background-color: #fff;
-          content: "";
+          position: relative;
+          cursor: pointer;
+          display: inline-block;
+          box-sizing: border-box;
+          &:after {
+            width: 4px;
+            height: 4px;
+            border-radius: 100%;
+            background-color: #fff;
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%) scale(0);
+            transition: transform .15s ease-in;
+          }
+        }
+        .hm-radio__original {
+          opacity: 0;
+          outline: none;
           position: absolute;
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%,-50%) scale(0);
-          transition: transform .15s ease-in;
+          z-index: -1;
+          top: 0;
+          left: 0px;
+          right: 0;
+          bottom: 0;
+          margin: 0;
         }
       }
-      .hm-radio__original {
-        opacity: 0;
-        outline: none;
-        position: absolute;
-        z-index: -1;
-        top: 0;
-        left: 0px;
-        right: 0;
-        bottom: 0;
-        margin: 0;
+      .hm-radio__label {
+        font-size: 14px;
+        padding-left: 10px;
       }
     }
-    .hm-radio__label {
-      font-size: 14px;
-      padding-left: 10px;
-    }
-  }
+    
 
 选中的样式
 
@@ -1379,78 +1297,75 @@ radio组件
         color: #409eff;
       }
     }
-    
 
 
 label与插槽的处理
 
 - props接收
 
-  props: {
-    label: {
-      type: String,
-      default: ''
-    },
-    name: {
-      type: String,
-      default: ''
+    props: {
+      label: {
+        type: String,
+        default: ''
+      },
+      name: {
+        type: String,
+        default: ''
+      }
     }
-  }
-
+    
 - 处理插槽
 
-  <span class="hm-radio__label">
-    <slot></slot>
-    <!-- 如果没有插槽内容，那么label就是内容 -->
-
-    <template v-if="!$slots.default">{{label}}</template>
-
-  </span>
+    <span class="hm-radio__label">
+      <slot></slot>
+      <!-- 如果没有插槽内容，那么label就是内容 -->
+      <template v-if="!$slots.default">{{label}}</template>
+    </span>
+    
 
 v-model处理
 
 - 接收props数据
 
-  name: {
-    type: String,
-    default: ''
-  },
-  value: {
-    type: [String, Boolean, Number],
-    default: ''
-  }
-
+    name: {
+      type: String,
+      default: ''
+    },
+    value: {
+      type: [String, Boolean, Number],
+      default: ''
+    }
+    
 - 结构
 
-  <input
-    class="hm-radio__original"
-    type="radio"
-    :name="name"
-    value="label"
-    v-model="model"
-
-  >
-
+    <input
+      class="hm-radio__original"
+      type="radio"
+      :name="name"
+      value="label"
+      v-model="model"
+    >
+    
 - 提供计算属性
 
-  computed: {
-    model: {
-      get () {
-        return this.value
-      },
-      set (value) {
-        this.$emit('input', value)
+    computed: {
+      model: {
+        get () {
+          return this.value
+        },
+        set (value) {
+          this.$emit('input', value)
+        }
       }
-    }
-  },
-
-  
+    },
+    
+    
 
 - 控制选中样式
 
-  <label class="hm-radio" :class="{'is-checked': model === label}">
-
-  
+    <label class="hm-radio" :class="{'is-checked': model === label}">
+    
+    
 
 radio-group组件
 
@@ -1459,7 +1374,6 @@ radio-group组件
 前置知识
 
     provide与inject
-    
 
 
 ​    
@@ -1473,7 +1387,6 @@ radio-group组件
         <slot></slot>
       </div>
     </template>
-    
 
 
 ​    
@@ -1491,7 +1404,6 @@ radio-group组件
         value: null
       }
     }
-    
 
 
 ​    
@@ -1500,35 +1412,35 @@ radio-group组件
 
 - 接收inject
 
-  inject: {
-    RadioGroup: {
-      default: ''
-    }
-  },
-
-  
+    inject: {
+      RadioGroup: {
+        default: ''
+      }
+    },
+    
+    
 
 - 计算属性判断是否包裹在group中
 
-  // 判断包裹在group中
-  isGroup () {
-    return !!this.RadioGroup
-  }
-
-  
+    // 判断包裹在group中
+    isGroup () {
+      return !!this.RadioGroup
+    }
+    
+    
 
 - 修改代码
 
-  model: {
-    get () {
-      return this.isGroup ? this.RadioGroup.value : this.value
-    },
-    set (value) {
-      this.isGroup ? this.RadioGroup.$emit('input', value) : this.$emit('input', value)
+    model: {
+      get () {
+        return this.isGroup ? this.RadioGroup.value : this.value
+      },
+      set (value) {
+        this.isGroup ? this.RadioGroup.$emit('input', value) : this.$emit('input', value)
+      }
     }
-  }
-
-  
+    
+    
 
 checkbox组件
 
@@ -1546,7 +1458,6 @@ checkbox组件
         </span>
       </label>
     </template>
-    
 
 
 ​    
@@ -1616,7 +1527,6 @@ checkbox组件
         font-size: 14px;
       }
     }
-    
 
 
 ​    
@@ -1637,7 +1547,6 @@ checkbox组件
         color: #409eff;
       }
     }
-    
 
 
 ​    
@@ -1656,7 +1565,6 @@ checkbox组件
       type: String,
       default: ''
     }
-    
 
 
 ​    
@@ -1665,33 +1573,31 @@ checkbox组件
 
 - 控制label
 
-  <span class="hm-checkbox__label">
-    <slot></slot>
-
-    <template v-if="!$slots.default">{{label}}</template>
-
-  </span>
-
-  
+    <span class="hm-checkbox__label">
+      <slot></slot>
+      <template v-if="!$slots.default">{{label}}</template>
+    </span>
+    
+    
 
 - 提供model计算属性
 
-  model: {
-    get () {
-      return this.value
-    },
-    set (value) {
-      this.$emit('input', value)
+    model: {
+      get () {
+        return this.value
+      },
+      set (value) {
+        this.$emit('input', value)
+      }
     }
-  }
-
-  
+    
+    
 
 - 判断是否选中
 
-  <label class="hm-checkbox" :class="{'is-checked': value}">
-
-  
+    <label class="hm-checkbox" :class="{'is-checked': value}">
+    
+    
 
 checkbox-group组件
 
@@ -1704,7 +1610,6 @@ checkbox-group组件
         <slot></slot>
       </div>
     </template>
-    
 
 
 ​    
@@ -1712,66 +1617,64 @@ checkbox-group组件
 
 - 提供provide
 
-  props: {
-    value: {
-      type: Array,
-      default: function () {
-        return []
+    props: {
+      value: {
+        type: Array,
+        default: function () {
+          return []
+        }
+      }
+    },
+    provide () {
+      return {
+        CheckboxGroup: this
       }
     }
-  },
-  provide () {
-    return {
-      CheckboxGroup: this
-    }
-  }
-
-  
+    
+    
 
 修改checkbox
 
 - 接收inject
 
-  inject: {
-    CheckboxGroup: {
-      default: ''
-    }
-  },
-
-  
+    inject: {
+      CheckboxGroup: {
+        default: ''
+      }
+    },
+    
+    
 
 - 修改
 
-      model: {
-        get () {
-          return this.isGroup ? this.CheckboxGroup.value : this.value
-        },
-        set (value) {
-          if (this.isGroup) {
-            // 修改value属性
-            console.log(value, this.label)
-            this.CheckboxGroup.$emit('input', value)
-          } else {
-            this.$emit('input', value)
+        model: {
+          get () {
+            return this.isGroup ? this.CheckboxGroup.value : this.value
+          },
+          set (value) {
+            if (this.isGroup) {
+              // 修改value属性
+              console.log(value, this.label)
+              this.CheckboxGroup.$emit('input', value)
+            } else {
+              this.$emit('input', value)
+            }
           }
+        },  
+    isGroup () {
+        return !!this.CheckboxGroup
+      },
+      isChecked () {
+        // 判断是否选中
+        // console.log(this.model)
+        if (this.isGroup) {
+          return this.model.includes(this.label)
+        } else {
+          return this.model
         }
-      },  
-      
-
-  isGroup () {
-      return !!this.CheckboxGroup
-    },
-    isChecked () {
-      // 判断是否选中
-      // console.log(this.model)
-      if (this.isGroup) {
-        return this.model.includes(this.label)
-      } else {
-        return this.model
       }
-    }
-
-  
+    
+    
 
 form组件
 
@@ -1807,7 +1710,6 @@ form组件
     <style>
     
     </style>
-    
 
 
 ​    
@@ -1866,7 +1768,6 @@ form-item组件
       }
     }
     </style>
-    
 
 
 ​    
@@ -1880,15 +1781,13 @@ form-item组件
 
 - 根目录创建两个文件夹packages和examples
 
-  packages: 用于存放所有的组件
-  examples: 用于进行测试,把src改成examples
-
-  
+    packages: 用于存放所有的组件
+    examples: 用于进行测试,把src改成examples
+    
+    
 
 - 把components中所有的组件放入到packages中
-
 - 把fonts放到packages中
-
 - 删除原来的src目录
 
 vue.config.js配置
@@ -1917,60 +1816,60 @@ vue.config.js配置
           })
       }
     }
-    
 
 
 ​    
 
 - 统一导出packages中所有的组件
 
-  // 统一导出
-  // 导入颜色选择器组件
-  import Button from './button'
-  import Dialog from './dialog'
-  import Input from './input'
-  import Checkbox from './checkbox'
-  import Radio from './radio'
-  import RadioGroup from './radio-group'
-  import Switch from './switch'
-  import CheckboxGroup from './checkbox-group'
-  import Form from './form'
-  import FormItem from './form-item'
-  import './fonts/font.scss'
-
-  // 存储组件列表
-  const components = [
-    Button,
-    Dialog,
-    Input,
-    Checkbox,
-    Radio,
-    RadioGroup,
-    Switch,
-    CheckboxGroup,
-    Form,
-    FormItem
-  ]
-
-  // 定义 install 方法，接收 Vue 作为参数。如果使用 use 注册插件，则所有的组件都将被注册
-  const install = function (Vue) {
-    // 遍历注册全局组件
-    components.forEach(component => {
-      Vue.component(component.name, component)
-    })
-  }
-
-  // 判断是否是直接引入文件,如果是，就不用调用 Vue.use()
-  if (typeof window !== 'undefined' && window.Vue) {
-    install(window.Vue)
-  }
-
-  // 导出的对象必须具有 install，才能被 Vue.use() 方法安装
-  export default {
-    install
-  }
-
-  
+    // 统一导出
+    // 导入颜色选择器组件
+    import Button from './button'
+    import Dialog from './dialog'
+    import Input from './input'
+    import Checkbox from './checkbox'
+    import Radio from './radio'
+    import RadioGroup from './radio-group'
+    import Switch from './switch'
+    import CheckboxGroup from './checkbox-group'
+    import Form from './form'
+    import FormItem from './form-item'
+    import './fonts/font.scss'
+    
+    // 存储组件列表
+    const components = [
+      Button,
+      Dialog,
+      Input,
+      Checkbox,
+      Radio,
+      RadioGroup,
+      Switch,
+      CheckboxGroup,
+      Form,
+      FormItem
+    ]
+    
+    // 定义 install 方法，接收 Vue 作为参数。如果使用 use 注册插件，则所有的组件都将被注册
+    const install = function (Vue) {
+      // 遍历注册全局组件
+      components.forEach(component => {
+        Vue.component(component.name, component)
+      })
+    }
+    
+    // 判断是否是直接引入文件,如果是，就不用调用 Vue.use()
+    if (typeof window !== 'undefined' && window.Vue) {
+      install(window.Vue)
+    }
+    
+    // 导出的对象必须具有 install，才能被 Vue.use() 方法安装
+    export default {
+      install
+    }
+    
+    
+    
 
 测试
 
@@ -1988,7 +1887,6 @@ vue.config.js配置
     new Vue({
       render: h => h(App)
     }).$mount('#app')
-    
 
 
 ​    
@@ -2008,11 +1906,11 @@ vue.config.js配置
 
  https://cli.vuejs.org/zh/guide/build-targets.html#%E5%BA%93 
 
-- 在scripts中新增一条 打包命令
+- 在package.json的"scripts"中新增一条 打包命令 
 
-  "lib": "vue-cli-service build --target lib packages/index.js"
-
-  
+    "lib": "vue-cli-service build --target lib packages/index.js"
+    
+    然后运行 npm run lib
 
 
 
@@ -2020,12 +1918,12 @@ vue.config.js配置
 
 修改package.json文件
 
-    "private": false,
+    // 设置为false
+    "private": false, 
     "main": "dist/itcast-ui.umd.min.js",
     "author": {
       "name": "胡聪聪"
     },
-    
 
 
 ​    
@@ -2043,7 +1941,6 @@ vue.config.js配置
     vue.config.js
     babel.config.js
     *.map
-    
 
 
 ​    
@@ -2052,8 +1949,19 @@ vue.config.js配置
 
 - npm发布
 
-  npm login
-  npm publish
+    npm -g install nrm ， nrm ls 查看所有源地址 ， nrm use npm 切换到 npm 的源地址
+    
+    npm login
+    npm publish
+    
+    每次上传都要修改package.json的version（包的版本）
+    
+    如果遇到403错误，可能是package.json的name有其他人使用过。
+    
+     
+    
+    
+    
+    
 
-  
 
