@@ -27,12 +27,12 @@
         <hm-button round type="danger">按钮</hm-button>
       </div>
       <div class="row">
-        <hm-button circle>按</hm-button>
-        <hm-button circle type="primary">按</hm-button>
-        <hm-button circle type="success">按</hm-button>
-        <hm-button circle type="info">按</hm-button>
-        <hm-button circle type="warning">按</hm-button>
-        <hm-button circle type="danger">按</hm-button>
+        <hm-button circle>P</hm-button>
+        <hm-button circle type="primary">P</hm-button>
+        <hm-button circle type="success">P</hm-button>
+        <hm-button circle type="info">P</hm-button>
+        <hm-button circle type="warning">P</hm-button>
+        <hm-button circle type="danger">P</hm-button>
       </div>
       <div class="row">
         <hm-button icon="el-icon-ice-cream-round" circle></hm-button>
@@ -55,7 +55,8 @@
     <!-- 对话框组件测试 -->
     <div class="dialog-wrap">
       <!-- :visible.sync="visible" 1、向子组件传递参数 2、可以让点击遮罩层和右上角x 也能关闭对话框 -->
-      <hm-button type="primary" @click="visible=true">测试dialog点击</hm-button>
+      <hm-button type="primary" @click="visible=true">测试dialog点击（对话框）
+      </hm-button>
       <hm-dialog title="哈哈" width="50%" top="200px" :visible.sync="visible"
         :close-on-click-modal=false>
         <template v-slot:footer>
@@ -85,19 +86,20 @@
     <!-- Switch组件测试 -->
     <div class="swtich-wrap">
       <hm-switch v-model="active1" inactive-color="#1a6aaa"></hm-switch>
+      &ensp;
       <hm-switch v-model="active2" name="username" active-color="pink"
         inactive-color="skyblue">
       </hm-switch>
     </div>
-
+    <br />
     <!-- radio组件测试 -->
     <div class="radio-wrap">
       <hm-radio-group v-model="gender">
         <hm-radio label="1">男</hm-radio>
         <hm-radio label="0">女</hm-radio>
       </hm-radio-group><br />
-      <hm-radio label="1" v-model="gender">男</hm-radio>
-      <hm-radio label="0" v-model="gender">女</hm-radio>
+      <!-- <hm-radio label="1" v-model="gender">男</hm-radio> -->
+      <!-- <hm-radio label="0" v-model="gender">女</hm-radio> -->
     </div>
 
     <!-- checkbox组件测试 -->
@@ -112,9 +114,12 @@
       <hm-checkbox label="画画" v-model="active3"></hm-checkbox>
       <hm-checkbox label="跳舞" v-model="active3"></hm-checkbox>
     </div>
+    <br />
 
     <!-- form、form-item组件测试 -->
-    <hm-form :model="model" label-width="80px">
+    <div style="color:#aaa;">form、form-item组件测试：</div>
+    <br />
+    <hm-form :model="model" label-width="60px">
       <hm-form-item label="用户名">
         <hm-input placeholder="请输入用户名" v-model="model.username"></hm-input>
       </hm-form-item>
@@ -122,8 +127,6 @@
         <hm-switch v-model="model.active"></hm-switch>
       </hm-form-item>
     </hm-form>
-
-    <hm-button type="primary">JayUI</hm-button>
 
   </div>
 </template>
@@ -143,15 +146,15 @@ export default {
       hobby: ['篮球', '画画', '跳舞'],
       model: {
         username: 'Jay',
-        active: false
-      }
+        active: false,
+      },
     }
   },
   methods: {
     fn(e) {
       console.log(typeof e.target.value)
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -167,6 +170,9 @@ export default {
 }
 .input-wrap {
   margin: 20px 0;
+  .hm-input {
+    margin-bottom: 15px;
+  }
 }
 .radio-wrap {
   margin: 20px 0;

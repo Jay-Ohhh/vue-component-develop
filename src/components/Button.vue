@@ -6,9 +6,10 @@
   },{
     'is-circle':circle
   },{'is-disabled':disabled}]" @click="handleClick" :disabled="disabled">
+    <!-- 对于element icon：直接通过设置类名为 el-icon-iconName 来使用即可-->
     <!-- 如果传入了icon -->
     <i v-if="icon" :class="icon"></i>
-    <!-- 如果传入了 -->
+    <!-- 如果传入了其他内容 -->
     <span v-if="$slots.default">
       <slot></slot>
     </span>
@@ -23,40 +24,40 @@ export default {
     // 类型
     type: {
       type: String,
-      default: ''
+      default: '',
     },
     // 是否朴素(镂空)
     plain: {
       type: Boolean,
-      default: false
+      default: false,
     },
     // 是否圆角
     round: {
       type: Boolean,
-      default: false
+      default: false,
     },
     // 是否圆
     circle: {
       type: Boolean,
-      default: false
+      default: false,
     },
     // 字体图标
     icon: {
       type: String,
-      default: ''
+      default: '',
     },
     // 是否禁用
     disabled: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   methods: {
     handleClick(e) {
       // 派发click事件，覆盖掉了原生的click事件，传事件对象
       this.$emit('click', e)
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -225,8 +226,10 @@ export default {
   }
   // 圆
   &.is-circle {
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    padding: 12px;
+    font-size: 14px;
   }
   [class*='el-icon-'] + span {
     margin-left: 5px;

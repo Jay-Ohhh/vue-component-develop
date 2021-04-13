@@ -10,18 +10,18 @@ export default {
   props: {
     model: {
       type: Object,
-      required: true
+      required: true,
     },
     labelWidth: {
       type: String,
-      default: '80px'
-    }
+      default: 'auto',
+    },
   },
   provide() {
     return {
-      Form: this
+      Form: this,
     }
-  }
+  },
 }
 </script>
 

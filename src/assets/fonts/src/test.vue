@@ -1,8 +1,8 @@
 <template>
-  <div class="hm-form-item">
-    <label class="hm-form-item__label"
+  <div class="Jay-form-item">
+    <label class="Jay-form-item__label"
       :style="{width:this.Form.labelWidth}">{{label}}</label>
-    <div class="hm-form-item__content">
+    <div class="Jay-form-item__content">
       <slot></slot>
     </div>
   </div>
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: 'hmFormItem',
+  name: 'JayFormItem',
   inject: { Form: { default: null } },
   props: {
     label: {
@@ -22,9 +22,9 @@ export default {
 </script>
 
 <style lang="scss">
-.hm-form-item {
+.Jay-form-item {
   margin-bottom: 25px;
-  .hm-form-item__label {
+  .Jay-form-item__label {
     text-align: right;
     vertical-align: middle;
     float: left;
@@ -34,7 +34,7 @@ export default {
     padding: 0 12px 0 0;
     box-sizing: border-box;
   }
-  .hm-form-item__content {
+  .Jay-form-item__content {
     line-height: 40px;
     position: relative;
     font-size: 14px;

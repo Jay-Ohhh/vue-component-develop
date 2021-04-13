@@ -1,0 +1,14 @@
+.Jay-checkbox.is-checked {
+  .Jay-checkbox__input {
+    .Jay-checkbox__inner {
+      background-color: #409eff;
+      border-color: #409eff;
+      &:after {
+        transform: rotate(45deg) scaleY(1);
+      }
+    }
+  }
+  .Jay-checkbox__label {
+    color: #409eff;
+  }
+}
