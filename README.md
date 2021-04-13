@@ -2024,7 +2024,7 @@ new Vue({
 修改**package.json**文件
 
 ```js
-"name": "jayvictor-ui",
+"name": "jay-ui",
 "version": "0.1.0",
 // 设置为false
 "private": false, 
@@ -2048,7 +2048,7 @@ new Vue({
 
 ##### npm发布
 
-npm -g install nrm ， nrm ls 查看所有源地址 ， nrm use npm 切换到 npm 的源地址
+npm -g install nrm ， nrm ls 查看所有源地址 ， nrm use 源地址
 
 npm login
 npm publish
@@ -2056,11 +2056,3 @@ npm publish
 每次上传都要修改package.json的version（包的版本）
 
 如果遇到403错误，可能是package.json的name有其他人使用过。
-
- 
-
-
-
-
-
-
