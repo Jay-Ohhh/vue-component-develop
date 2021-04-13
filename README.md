@@ -1,5 +1,5 @@
 <h3 align="center" style="margin:-20px 0 0;">Jay-UI</h3>
-<h4 align="center" style="margin:5px 0 0;">适用于Vue的常用组件库</h4>
+<h4 align="center" style="margin:5px 0 0;">基于Vue2的常用组件库</h4>
 
 ### You can use
 
