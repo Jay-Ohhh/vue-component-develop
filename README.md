@@ -2048,9 +2048,16 @@ new Vue({
 
 ##### npm发布
 
-npm -g install nrm ， nrm ls 查看所有源地址 ， nrm use 源地址
+npm -g install nrm 
+
+nrm ls 查看所有源地址 ，
+
+nrm use 源地址
+
+需要切回官方地址
 
 npm login
+
 npm publish
 
 每次上传都要修改package.json的version（包的版本）
