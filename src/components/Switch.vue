@@ -1,40 +1,39 @@
 <template>
   <!-- 实际上是单选框 -->
-  <div class="hm-switch" :class="{'is-checked':value}" @click="handleClick">
-    <input type="checkbox" class="hm-switch__input" ref="input">
-    <span class="hm-switch__core" ref="core">
-      <span class="hm-switch__button"></span>
+  <div class="Jay-switch" :class="{'is-checked':value}" @click="handleClick">
+    <input type="checkbox" class="Jay-switch__input" ref="input">
+    <span class="Jay-switch__core" ref="core">
+      <span class="Jay-switch__button"></span>
     </span>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'hmSwitch',
+  name: 'JaySwitch',
   props: {
     value: {
       type: Boolean,
-      default: false
+      default: false,
     },
     name: {
       type: String,
-      default: ''
+      default: '',
     },
     activeColor: {
       type: String,
-      default: ''
+      default: '',
     },
     inactiveColor: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   methods: {
     async handleClick() {
       // 由于修改数据后，视图不会立刻更新，所以这里可以使用$nextTick或者async await
       await this.$emit('input', !this.value)
       this.$refs.input.checked = this.value
-      console.log(this.$refs.input.checked)
       this.changeActiveColor()
     },
     changeActiveColor() {
@@ -44,17 +43,17 @@ export default {
         this.$refs.core.style.backgroundColor = color
         this.$refs.core.style.borderColor = color
       }
-    }
+    },
   },
   mounted() {
     this.changeActiveColor()
     this.$refs.input.checked = this.value
-  }
+  },
 }
 </script>
 
 <style lang="scss">
-.hm-switch {
+.Jay-switch {
   display: inline-flex;
   align-items: center;
   position: relative;
@@ -62,14 +61,14 @@ export default {
   line-height: 20px;
   height: 20px;
   vertical-align: middle;
-  .hm-switch__input {
+  .Jay-switch__input {
     position: absolute;
     width: 0;
     height: 0;
     opacity: 0;
     margin: 0;
   }
-  .hm-switch__core {
+  .Jay-switch__core {
     margin: 0;
     display: inline-block;
     position: relative;
@@ -83,7 +82,7 @@ export default {
     cursor: pointer;
     transition: border-color 0.3s, background-color 0.3s;
     vertical-align: middle;
-    .hm-switch__button {
+    .Jay-switch__button {
       position: absolute;
       top: 1px;
       left: 1px;
@@ -95,11 +94,11 @@ export default {
     }
   }
 }
-.hm-switch.is-checked {
-  .hm-switch__core {
+.Jay-switch.is-checked {
+  .Jay-switch__core {
     border-color: #409eff;
     background-color: #409eff;
-    .hm-switch__button {
+    .Jay-switch__button {
       transform: translateX(20px);
     }
   }

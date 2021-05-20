@@ -1,25 +1,25 @@
 <template>
-  <div class="hm-checkbox-group">
+  <div class="Jay-checkbox-group">
     <slot></slot>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'hmCheckboxGroup',
+  name: 'JayCheckboxGroup',
   props: {
     value: {
       type: Array,
       default() {
         return []
-      }
-    }
+      },
+    },
   },
   provide() {
     return {
-      checkboxGroup: this
+      checkboxGroup: this,
     }
-  }
+  },
 }
 </script>
 

@@ -1,17 +1,19 @@
 <template>
   <!-- 单选按钮 将label的值传进input的value -->
   <!-- 为了不用让每个 radio 都绑定 v-model 可以用 radio-group 包裹 radio 用 radio-group 绑定 v-model -->
-  <label class="hm-radio" :class="{'is-checked':label===model}">
-    <span class="hm-radio__input">
-      <span class="hm-radio__inner"></span>
-      <!-- 在vue中对于radio单选框来说 每个单选框的value是不一样的 v-model绑定同一个变量实现单选 -->
-      <!-- 单选框的选中的值始终是v-model绑定的值 且值会绑定到value -->
-      <!-- value这一项必须写 因为v-model初始化时内部需要先保存value的初始值 -->
-      <!-- v-model实际上做了三件事 初始化时内部先记录了每个单选框的value初始值 :value="model" @change="model=选中的单选框的value初始值" -->
-      <input type="radio" class="hm-radio__original" :value="label" :name="name"
-        v-model="model">
+  <label class="Jay-radio" :class="{'is-checked':label===model}">
+    <span class="Jay-radio__input">
+      <span class="Jay-radio__inner"></span>
+      <!-- 单选框的value是选项的描述 -->
+      <!-- 单选框change时 ，checked 为true时 v-model将value作为自己的值 -->
+      <!-- 1、如果没被radio-group组件包裹，即是单个单选框 -->
+      <!-- 2、如果被checkbox-group组件包裹，即是多个单选框，则v-model绑定的是从radio-group组件传过来的值，根据该值与 
+      多个单选框的value进行匹配，如果匹配，则使该单选框的checked设置为true
+      单选框change时 ，checked 为true时 v-model将该单选框的value作为自己的值 -->
+      <input type="radio" class="Jay-radio__original" :value="label"
+        :name="name" v-model="model">
     </span>
-    <span class="hm-radio__label">
+    <span class="Jay-radio__label">
       <slot>{{label}}</slot>
     </span>
   </label>
@@ -19,22 +21,22 @@
 
 <script>
 export default {
-  name: 'hmRadio',
+  name: 'JayRadio',
   inject: {
     radioGroup: {
-      default: ''
-    }
+      default: '',
+    },
   },
   props: {
     label: {
       type: [String, Number, Boolean],
-      default: ''
+      default: '',
     },
     value: null, // 此value是父组件传来的value
     name: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   computed: {
     model: {
@@ -47,14 +49,14 @@ export default {
         this.radioGroup
           ? this.radioGroup.$emit('input', value)
           : this.$emit('input', value)
-      }
-    }
-  }
+      },
+    },
+  },
 }
 </script>
 
 <style lang="scss">
-.hm-radio {
+.Jay-radio {
   color: #606266;
   font-weight: 500;
   line-height: 1;
@@ -65,10 +67,8 @@ export default {
   outline: none;
   font-size: 14px;
   margin-right: 30px;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  .hm-radio__input {
+  user-select: none;
+  .Jay-radio__input {
     white-space: nowrap;
     cursor: pointer;
     outline: none;
@@ -76,7 +76,7 @@ export default {
     line-height: 1;
     position: relative;
     vertical-align: middle;
-    .hm-radio__inner {
+    .Jay-radio__inner {
       border: 1px solid #dcdfe6;
       border-radius: 100%;
       width: 14px;
@@ -98,7 +98,7 @@ export default {
         transform: translate(-50%, -50%) scale(0);
       }
     }
-    .hm-radio__original {
+    .Jay-radio__original {
       opacity: 0;
       outline: none;
       position: absolute;
@@ -110,14 +110,14 @@ export default {
       margin: 0;
     }
   }
-  .hm-radio__label {
+  .Jay-radio__label {
     font-size: 14px;
     padding-left: 10px;
   }
 }
-.hm-radio.is-checked {
-  .hm-radio__input {
-    .hm-radio__inner {
+.Jay-radio.is-checked {
+  .Jay-radio__input {
+    .Jay-radio__inner {
       border-color: #409eff;
       background-color: #409eff;
       &:after {
@@ -125,7 +125,7 @@ export default {
       }
     }
   }
-  .hm-radio__label {
+  .Jay-radio__label {
     color: #409eff;
   }
 }

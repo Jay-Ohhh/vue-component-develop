@@ -2,19 +2,19 @@
   <!-- vue动画 -->
   <transition name="dialog-fade">
     <!-- 遮罩层mask -->
-    <div class="hm-dialog__wrapper" v-show="visible"
+    <div class="Jay-dialog__wrapper" v-show="visible"
       @click.self="handleCloseByMask">
-      <div class="hm-dialog" :style="{width:width,marginTop:top}">
-        <div class="hm-dialog__header">
+      <div class="Jay-dialog" :style="{width:width,marginTop:top}">
+        <div class="Jay-dialog__header">
           <!-- 可以改变标题结构 -->
           <slot name="title">
-            <span class="hm-dialog__title">{{title}}</span>
+            <span class="Jay-dialog__title">{{title}}</span>
           </slot>
-          <button class="hm-dialog__headerbtn" @click="handleCloseByX">
+          <button class="Jay-dialog__headerbtn" @click="handleCloseByX">
             <i class="el-icon-close"></i>
           </button>
         </div>
-        <div class="hm-dialog__body">
+        <div class="Jay-dialog__body">
           <!-- 直接可以在Dialog标签里改内容 -->
           <slot>
             <span>这是一段信息</span>
@@ -22,7 +22,7 @@
         </div>
         <!-- 如果父组件v-slot:footer有内容,就会显示该盒子，
       并替换掉该插槽，如果没有v-slot:footer或其没有内容不会显示该盒子 -->
-        <div class="hm-dialog__footer" v-if="$slots.footer">
+        <div class="Jay-dialog__footer" v-if="$slots.footer">
           <slot name="footer"></slot>
         </div>
       </div>
@@ -33,29 +33,29 @@
 <script>
 export default {
   // vue规定名字不能是dialog，会冲突
-  name: 'hmDialog',
+  name: 'JayDialog',
   props: {
     title: {
       type: String,
-      default: '提示'
+      default: '提示',
     },
     width: {
       type: String,
-      default: '50%'
+      default: '50%',
     },
     top: {
       type: String,
-      default: '200px'
+      default: '200px',
     },
     visible: {
       type: Boolean,
-      default: false
+      default: false,
     },
     // 是否可以通过点击遮罩层关闭对话框
     closeOnClickModal: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   methods: {
     // 点击 右上角X 关闭对话框
@@ -66,13 +66,13 @@ export default {
     // 点击遮罩层，关闭对话框
     handleCloseByMask() {
       if (this.closeOnClickModal) this.$emit('update:visible', false)
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style lang="scss" >
-.hm-dialog__wrapper {
+.Jay-dialog__wrapper {
   // 遮罩层，使占满全屏，点击不了其他东西
   position: fixed;
   top: 0;
@@ -84,7 +84,7 @@ export default {
   z-index: 2001;
   background-color: rgba(0, 0, 0, 0.5);
 
-  .hm-dialog {
+  .Jay-dialog {
     position: relative;
     margin: 15vh auto 50px;
     background: #fff;
@@ -95,12 +95,12 @@ export default {
 
     &__header {
       padding: 20px 20px 10px;
-      .hm-dialog__title {
+      .Jay-dialog__title {
         line-height: 24px;
         font-size: 18px;
         color: #303133;
       }
-      .hm-dialog__headerbtn {
+      .Jay-dialog__headerbtn {
         position: absolute;
         top: 20px;
         right: 20px;
@@ -126,7 +126,7 @@ export default {
       padding: 10px 20px 20px;
       text-align: right;
       box-sizing: border-box;
-      .hm-button:first-child {
+      .Jay-button:first-child {
         margin-right: 20px;
       }
     }

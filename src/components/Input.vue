@@ -1,16 +1,16 @@
 <template>
-  <div class="hm-input " :class="{'hm-input--suffix':showSuffix}">
+  <div class="Jay-input " :class="{'Jay-input--suffix':showSuffix}">
     <!-- 如果传进来的是密码框则判断 -->
     <input :type="showPassword?(passwordVisible?'text':'password'):type"
-      class="hm-input__inner" :class="{'is-disabled':disabled}"
+      class="Jay-input__inner" :class="{'is-disabled':disabled}"
       :placeholder="placeholder" :name="name" :disabled="disabled"
       :value="value" @input="handleInput">
-    <span class="hm-input__suffix" v-if="showSuffix">
+    <span class="Jay-input__suffix" v-if="showSuffix">
       <!-- clearable为true且输入框要有值才显示 -->
-      <i class="hm-input__icon el-icon-circle-close" v-if="clearable && value"
+      <i class="Jay-input__icon el-icon-circle-close" v-if="clearable && value"
         @click="clear"></i>
       <!-- passwordVisible为true且输入框要有值才显示 -->
-      <i class="hm-input__icon el-icon-view " :class="{'el-icon-view-active':
+      <i class="Jay-input__icon el-icon-view " :class="{'el-icon-view-active':
         passwordVisible
       }" v-if="showPassword && value" @click="handlePassword"></i>
     </span>
@@ -19,48 +19,48 @@
 
 <script>
 export default {
-  name: 'hmInput',
+  name: 'JayInput',
   data() {
     return {
       // 不要用type来控制text和password的切换，因为type是父组件传过来的
       // 密码显示与隐藏
-      passwordVisible: false
+      passwordVisible: false,
     }
   },
   props: {
     type: {
       type: String,
-      default: 'text'
+      default: 'text',
     },
     placeholder: {
       type: String,
-      default: ''
+      default: '',
     },
     name: {
       type: String,
-      default: null
+      default: null,
     },
     disabled: {
       type: Boolean,
-      default: false
+      default: false,
     },
     value: {
       type: String,
-      default: ''
+      default: '',
     },
     clearable: {
       type: Boolean,
-      default: false
+      default: false,
     },
     showPassword: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   computed: {
     showSuffix() {
       return this.clearable || this.showPassword
-    }
+    },
   },
   methods: {
     // 输入事件
@@ -75,18 +75,18 @@ export default {
     // 密码显示与隐藏
     handlePassword() {
       this.passwordVisible = !this.passwordVisible
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style lang="scss">
-.hm-input {
+.Jay-input {
   position: relative;
   display: inline-block;
   width: 100%;
   font-size: 14px;
-  .hm-input__inner {
+  .Jay-input__inner {
     -webkit-appearance: none;
     background-color: #fff;
     background-image: none;
@@ -115,11 +115,11 @@ export default {
     }
   }
 }
-.hm-input--suffix {
-  .hm-input__inner {
+.Jay-input--suffix {
+  .Jay-input__inner {
     padding-right: 30px;
   }
-  .hm-input__suffix {
+  .Jay-input__suffix {
     position: absolute;
     height: 100%;
     right: 10px;

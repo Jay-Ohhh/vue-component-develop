@@ -1,19 +1,20 @@
 <template>
   <!-- 复选框 -->
-  <label class="hm-checkbox " :class="{'is-checked': isChecked}">
-    <span class="hm-checkbox__input">
-      <span class="hm-checkbox__inner"></span>
-      <!-- checkbox复选框选中的值始终是v-model绑定的值，且值会绑定到value-->
+  <label class="Jay-checkbox " :class="{'is-checked': isChecked}">
+    <span class="Jay-checkbox__input">
+      <span class="Jay-checkbox__inner"></span>
+      <!-- 复选框的value是选项的描述 -->
+      <!-- 单个复选框，value/v-model绑定到布尔值 -->
+      <!-- 多个复选框，value/v-model绑定到同一个数组 -->
+      <!-- checkbox复选框  v-model绑定的值，checked change事件 -->
       <!-- checkbox复选框的v-model的绑定分两种情况 -->
-      <!-- 1、如果没被checkbox-group组件包裹，则v-model绑定的是布尔值，此时v-model会做
-      :value="model" @change="model=该复选框的勾选状态" -->
-      <!-- 2、如果被checkbox-group组件包裹，则v-model绑定的是从checkbox-group组件传过来的选项数组 
-      v-model内部会根据复选框的checked增删选项数组的元素
-      :value="model" @change="model=选中的选项数组" -->
-      <input type="checkbox" class="hm-checkbox__original" :name="name"
+      <!-- 1、如果没被checkbox-group组件包裹，即是单个复选框，则v-model绑定的是this.value 布尔值 -->
+      <!-- 2、如果被checkbox-group组件包裹，即是多个复选框，则v-model绑定的是从checkbox-group组件传过来的选项数组 
+      change事件触发 v-model内部会根据复选框的checked变化增删选项数组的元素 -->
+      <input type="checkbox" class="Jay-checkbox__original" :name="name"
         :value="label" v-model="model">
     </span>
-    <span class="hm-checkbox__label" v-if="!$slots.default">
+    <span class="Jay-checkbox__label" v-if="!$slots.default">
       <slot>{{label}}</slot>
     </span>
   </label>
@@ -21,25 +22,25 @@
 
 <script>
 export default {
-  name: 'hmCheckbox',
+  name: 'JayCheckbox',
   inject: {
     checkboxGroup: {
-      default: null
-    }
+      default: null,
+    },
   },
   props: {
     value: {
       type: Boolean,
-      default: false
+      default: false,
     },
     name: {
       type: String,
-      default: ''
+      default: '',
     },
     label: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   computed: {
     // 如果没有被checkbox-group组件包裹，则model是布尔值，控制是否勾选
@@ -53,17 +54,17 @@ export default {
         this.checkboxGroup
           ? this.checkboxGroup.$emit('input', value)
           : this.$emit('input', value)
-      }
+      },
     },
     isChecked() {
       return this.checkboxGroup ? this.model.includes(this.label) : this.model
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style lang="scss" >
-.hm-checkbox {
+.Jay-checkbox {
   color: #606266;
   font-weight: 500;
   font-size: 14px;
@@ -73,7 +74,7 @@ export default {
   white-space: nowrap;
   user-select: none;
   margin-right: 30px;
-  .hm-checkbox__input {
+  .Jay-checkbox__input {
     white-space: nowrap;
     cursor: pointer;
     outline: none;
@@ -81,7 +82,7 @@ export default {
     line-height: 1;
     position: relative;
     vertical-align: middle;
-    .hm-checkbox__inner {
+    .Jay-checkbox__inner {
       display: inline-block;
       position: relative;
       border: 1px solid #dcdfe6;
@@ -109,7 +110,7 @@ export default {
         transform-origin: center;
       }
     }
-    .hm-checkbox__original {
+    .Jay-checkbox__original {
       opacity: 0;
       outline: none;
       position: absolute;
@@ -119,16 +120,16 @@ export default {
       z-index: -1;
     }
   }
-  .hm-checkbox__label {
+  .Jay-checkbox__label {
     display: inline-block;
     padding-left: 10px;
     line-height: 19px;
     font-size: 14px;
   }
 }
-.hm-checkbox.is-checked {
-  .hm-checkbox__input {
-    .hm-checkbox__inner {
+.Jay-checkbox.is-checked {
+  .Jay-checkbox__input {
+    .Jay-checkbox__inner {
       background-color: #409eff;
       border-color: #409eff;
       &:after {
@@ -136,7 +137,7 @@ export default {
       }
     }
   }
-  .hm-checkbox__label {
+  .Jay-checkbox__label {
     color: #409eff;
   }
 }

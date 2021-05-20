@@ -307,6 +307,7 @@ export default {
 .Jay-button.is-circle {
    width: 40px;
    height: 40px;
+   padding: 0;
    border-radius: 50%;
    font-size: 14px;
 }
@@ -740,15 +741,15 @@ afterLeave () {
 
 ##### 参数支持
 
-| 参数名称      | 描述                      | 类型    | 默认值 |
-| ------------- | ------------------------- | ------- | ------ |
-| placeholder   | 占位符                    | string  | null   |
-| type          | 文本框类型(text/password) | string  | 'text' |
-| disabled      | 禁用                      | boolean | false  |
-| clearable     | 是否显示清空按钮          | boolean | false  |
-| show-password | 是否显示密码切换按钮      | boolean | false  |
-| name          | name属性                  | string  | null   |
-| v-model       | 双向绑定                  | string  | ''     |
+| 参数名称      | 描述                      | 类型          | 默认值 |
+| ------------- | ------------------------- | ------------- | ------ |
+| placeholder   | 占位符                    | string        | null   |
+| type          | 文本框类型(text/password) | string        | 'text' |
+| disabled      | 禁用                      | boolean       | false  |
+| clearable     | 是否显示清空按钮          | boolean       | false  |
+| show-password | 是否显示密码切换按钮      | boolean       | false  |
+| name          | name属性                  | string        | null   |
+| value/v-model | 双向绑定                  | string/number | ''     |
 
 ##### 事件支持
 
@@ -1142,7 +1143,7 @@ handleChange (e) {
 
 | 参数名称      | 描述                 | 类型    | 默认值 |
 | ------------- | -------------------- | ------- | ------ |
-| v-model       | 双向绑定             | boolean | false  |
+| value/v-model | 双向绑定             | boolean | false  |
 | name          | name属性             | string  | ''     |
 | activeColor   | 自定义的激活的颜色   | string  | ''     |
 | inactiveColor | 自定义的不激活的颜色 | string  | ''     |
@@ -1340,13 +1341,17 @@ methods: {
 
     radio的基本使用
 
+单选框的value是选项的描述
+
+单选框change时 ，checked 为true时 v-model 将value作为自己的值
+
 ##### 参数支持
 
-| 参数名称 | 描述            | 类型                     | 默认值 |
-| -------- | --------------- | ------------------------ | ------ |
-| v-model  | 双向绑定        | boolean                  | false  |
-| label    | 单选框的value值 | string，number , boolean | ''     |
-| name     | name属性        | string                   | ''     |
+| 参数名称 | 描述       | 类型                      | 默认值 |
+| -------- | ---------- | ------------------------- | ------ |
+| value    | 绑定值     | string / number / boolean |        |
+| label    | 选项的描述 | string，number , boolean  | ''     |
+| name     | name属性   | string                    | ''     |
 
 ##### 基本结构
 
@@ -1357,10 +1362,12 @@ methods: {
   <label class="Jay-radio" :class="{'is-checked':label===model}">
     <span class="Jay-radio__input">
       <span class="Jay-radio__inner"></span>
-      <!-- 在vue中对于radio单选框来说 每个单选框的value是不一样的 v-model绑定同一个变量实现单选 -->
-      <!-- 单选框的选中的值始终是v-model绑定的值 且值会绑定到value -->
-      <!-- value这一项必须写 因为v-model初始化时内部需要先保存value的初始值 -->
-      <!-- v-model实际上做了三件事 初始化时内部先记录了每个单选框的value初始值 :value="model" @change="model=选中的单选框的value初始值" -->
+      <!-- 单选框的value是选项的描述 -->
+      <!-- 单选框change时 ，checked 为true时 v-model将value作为自己的值 -->
+      <!-- 1、如果没被radio-group组件包裹，即是单个单选框 -->
+      <!-- 2、如果被checkbox-group组件包裹，即是多个单选框，则v-model绑定的是从radio-group组件传过来的值，根据该值与 
+      多个单选框的value进行匹配，如果匹配，则使该单选框的checked设置为true
+      单选框change时 ，checked 为true时 v-model将该单选框的value作为自己的值 -->
       <input type="radio" class="Jay-radio__original" :value="label"
         :name="name" v-model="model">
     </span>
@@ -1376,7 +1383,7 @@ methods: {
 ```js
 <script>
 export default {
-  name: 'hmSwitch',
+  name: 'JaySwitch',
   props: {
     value: {
       type: Boolean,
@@ -1515,6 +1522,16 @@ export default {
 
     provide与inject
 
+如果多个checkbox被checkbox-group组件包裹，即是多个单选框，则v-model绑定的是从radio-group组件传过来的值，根据该值与 多个单选框的value进行匹配，如果匹配，则使该单选框的checked设置为true。
+
+单选框change时 ，checked 为true时 v-model将该单选框的value作为自己的值。
+
+##### 参数支持
+
+| 参数名称 | 描述   | 类型                      | 默认值 |
+| -------- | ------ | ------------------------- | ------ |
+| value    | 绑定值 | string / number / boolean |        |
+
 ##### 基本结构
 
 ```vue
@@ -1577,6 +1594,18 @@ computed: {
 
 #### checkbox组件
 
+复选框的value是选项的描述
+
+单个复选框，value/v-model绑定到布尔值
+
+##### 参数支持
+
+| 参数名称 | 描述       | 类型                      | 默认值 |
+| -------- | ---------- | ------------------------- | ------ |
+| value    | 绑定值     | string / number / boolean |        |
+| label    | 选项的描述 | string                    | ''     |
+| name     | name属性   | string                    | ''     |
+
 ##### 基本结构
 
 ```vue
@@ -1585,13 +1614,14 @@ computed: {
   <label class="Jay-checkbox " :class="{'is-checked': isChecked}">
     <span class="Jay-checkbox__input">
       <span class="Jay-checkbox__inner"></span>
-      <!-- checkbox复选框选中的值始终是v-model绑定的值，且值会绑定到value-->
+      <!-- 复选框的value是选项的描述 -->
+      <!-- 单个复选框，value/v-model绑定到布尔值 -->
+      <!-- 多个复选框，value/v-model绑定到同一个数组 -->
+      <!-- checkbox复选框  v-model绑定的值，checked change事件 -->
       <!-- checkbox复选框的v-model的绑定分两种情况 -->
-      <!-- 1、如果没被checkbox-group组件包裹，则v-model绑定的是布尔值，此时v-model会做
-      :value="model" @change="model=该复选框的勾选状态" -->
-      <!-- 2、如果被checkbox-group组件包裹，则v-model绑定的是从checkbox-group组件传过来的选项数组 
-      v-model内部会根据复选框的checked增删选项数组的元素
-      :value="model" @change="model=选中的选项数组" -->
+      <!-- 1、如果没被checkbox-group组件包裹，即是单个复选框，则v-model绑定的是this.value 布尔值 -->
+      <!-- 2、如果被checkbox-group组件包裹，即是多个复选框，则v-model绑定的是从checkbox-group组件传过来的选项数组 
+      change事件触发 v-model内部会根据复选框的checked变化增删选项数组的元素 -->
       <input type="checkbox" class="Jay-checkbox__original" :name="name"
         :value="label" v-model="model">
     </span>
@@ -1608,7 +1638,7 @@ computed: {
 ```vue
 <script>
 export default {
-  name: 'hmCheckbox',
+  name: 'JayCheckbox',
   inject: {
     checkboxGroup: {
       default: null
@@ -1742,6 +1772,14 @@ export default {
 
 使用checkbox-group组件包裹checkbox
 
+多个复选框，value/v-model绑定到同一个数组
+
+##### 参数支持
+
+| 参数名称 | 描述       | 类型  | 默认值 |
+| -------- | ---------- | ----- | ------ |
+| value    | 选中项数组 | array | []     |
+
 ##### 基本结构
 
 ```vue
@@ -1757,7 +1795,7 @@ export default {
 ```vue
 <script>
 export default {
-  name: 'hmCheckboxGroup',
+  name: 'JayCheckboxGroup',
   props: {
     value: {
       type: Array,
@@ -1811,6 +1849,13 @@ computed: {
 ```
 #### form组件
 
+##### 参数支持
+
+| 参数名称   | 描述         | 类型   | 默认值 |
+| ---------- | ------------ | ------ | ------ |
+| model      | 表单数据对象 | object | null   |
+| labelWidth | label的宽度  | string | 'auto' |
+
 ##### 基本Vue结构
 
 ```vue
@@ -1822,7 +1867,7 @@ computed: {
 
 <script>
 export default {
-  name: 'hmForm',
+  name: 'JayForm',
   props: {
     model: {
       type: Object,
@@ -1846,6 +1891,12 @@ export default {
 ```
 
 #### form-item组件
+
+##### 参数支持
+
+| 参数名称 | 描述       | 类型   | 默认值 |
+| -------- | ---------- | ------ | ------ |
+| label    | 选项的描述 | string | ''     |
 
 ##### 基本Vue结构
 

@@ -1,5 +1,5 @@
 <template>
-  <button class="hm-button" :class="[`hm-button--${type}`,{
+  <button class="Jay-button" :class="[`Jay-button--${type}`,{
     'is-plain':plain
   },{
     'is-round':round
@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'hmButton',
+  name: 'JayButton',
   // 封装一个通用的组件，会对props做约束(校验)，
   props: {
     // 类型
@@ -62,7 +62,7 @@ export default {
 </script>
 
 <style lang="scss">
-.hm-button {
+.Jay-button {
   display: inline-block;
   line-height: 1;
   white-space: nowrap;
@@ -78,9 +78,7 @@ export default {
   transition: 0.1s;
   font-weight: 500;
   // 禁止元素的文字被选中
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
+  user-select: none;
   padding: 12px 20px;
   font-size: 14px;
   border-radius: 4px;
@@ -228,6 +226,7 @@ export default {
   &.is-circle {
     width: 40px;
     height: 40px;
+    padding: 0;
     border-radius: 50%;
     font-size: 14px;
   }
