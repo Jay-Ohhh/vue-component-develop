@@ -28,7 +28,7 @@ Copyright © 2020 - present , Jay_Ohhh
 
 ### 常见组件封装
 
-本组件库用到 **Element-UI 的 icon 图标**，根据选择，也可以使用 **阿里 iconfont** 和 **Font Awesome**
+本组件库用到 **Element-UI 的 icon 图标**，根据选择，也可以使用 **iconfont** 和 **Font Awesome**
 
 #### button组件
 
