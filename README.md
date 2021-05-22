@@ -30,6 +30,18 @@ Copyright © 2020 - present , Jay_Ohhh
 
 本组件库用到 **Element-UI 的 icon 图标**，根据选择，也可以使用 **iconfont** 和 **Font Awesome**
 
+为方便使用者更改样式，类名应当尽量的简单易记，可以使用BEM命名规范。
+
+```css
+.block{}
+.block__element{}
+.block--modifier{}
+```
+
+- .block：代表了更高级别的抽象或组件
+- .block__element：代表.block的元素，用于形成一个完整的.block的整体。
+- .block--modifier：代表.block的不同状态或不同版本
+
 #### button组件
 
 ##### 前置知识
@@ -849,8 +861,6 @@ export default {
 }
 </script>
 ```
-
-
 
 ##### 基本样式
 
@@ -1829,8 +1839,8 @@ inject: {
 
 ```js
 computed: {
-    // 如果没有被checkbox-group组件包裹，则model是布尔值，控制是否勾选
-    // 如果被checkbox-group组件包裹，则model是一个数组
+    // 如果没有被checkbox-group组件包裹，则 model 是布尔值，控制是否勾选
+    // 如果被checkbox-group组件包裹，则 model 是一个数组
     model: {
       // checkboxGroup ? 是否被checkbox-group组件包裹
       get() {
@@ -2060,11 +2070,9 @@ new Vue({
 }).$mount('#app')  
 ```
 
-##### 发布到npm
+##### publish 到 npm
 
- https://cli.vuejs.org/zh/guide/build-targets.html#%E5%BA%93 
-
-- 在package.json的"scripts"中新增一条 打包命令 
+- [在package.json的"scripts"中新增一条 打包命令]( https://cli.vuejs.org/zh/guide/build-targets.html#%E5%BA%93 ) 
 
     "lib": "vue-cli-service build --target lib packages/index.js"
     
@@ -2097,7 +2105,7 @@ new Vue({
     babel.config.js
     *.map
 
-##### npm发布
+##### npm publish
 
 npm -g install nrm 
 
@@ -2105,7 +2113,7 @@ nrm ls 查看所有源地址 ，
 
 nrm use 源地址
 
-需要切回官方地址
+需要切回npm源地址
 
 npm login
 
@@ -2113,4 +2121,4 @@ npm publish
 
 每次上传都要修改package.json的version（包的版本）
 
-如果遇到403错误，可能是package.json的name有其他人使用过。
+如果遇到403错误，可能是package.json的name字段有其他人使用过。
